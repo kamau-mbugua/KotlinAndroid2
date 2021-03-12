@@ -31,6 +31,8 @@ class LetterListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        _binding = FragmentLetterListBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 }
