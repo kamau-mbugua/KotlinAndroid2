@@ -19,4 +19,5 @@ private const val ARG_PARAM2 = "param2"
  */
 class LetterListFragment : Fragment() {
     private var _binding: FragmentLetterListBinding? = null
+    private val binding get() = _binding!!
 }
