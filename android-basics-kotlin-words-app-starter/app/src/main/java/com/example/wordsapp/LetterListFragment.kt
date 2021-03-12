@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wordsapp.databinding.FragmentLetterListBinding
 
@@ -44,7 +46,14 @@ class LetterListFragment : Fragment() {
     }
 
     private fun chooseLayout() {
-        TODO("Not yet implemented")
+        if (isLinearLayoutManager) {
+            recyclerView.layoutManager = LinearLayoutManager(this)
+
+        } else {
+            recyclerView.layoutManager = GridLayoutManager(this, 4)
+
+        }
+        recyclerView.adapter = LetterAdapter()
     }
 
     override fun onDestroyView() {
