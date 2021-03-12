@@ -23,6 +23,7 @@ class LetterListFragment : Fragment() {
     private var _binding: FragmentLetterListBinding? = null
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
+    private var isLinearLayoutManager = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,5 +87,21 @@ class LetterListFragment : Fragment() {
             else ContextCompat.getDrawable(this, R.drawable.ic_linear_layout)
 
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_switch_layout -> {
+                isLinearLayoutManager = !isLinearLayoutManager
+
+                chooseLayout()
+                setIcon(item)
+
+                return true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+
+        }
     }
 }
