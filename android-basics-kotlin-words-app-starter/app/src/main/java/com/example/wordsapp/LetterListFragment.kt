@@ -31,6 +31,16 @@ class LetterListFragment : Fragment() {
     }
 
     override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentLetterListBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return  view
+    }
+
+    /*override fun onCreateView(
 
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +49,7 @@ class LetterListFragment : Fragment() {
         _binding = FragmentLetterListBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
-    }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
