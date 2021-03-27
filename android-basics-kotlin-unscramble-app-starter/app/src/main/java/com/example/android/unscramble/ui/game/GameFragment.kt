@@ -127,6 +127,13 @@ class GameFragment : Fragment() {
         activity?.finish()
     }
 
+    private fun onSubmitWord() {
+        if (viewModel.nextWord()) {
+            updateNextWordOnScreen()
+        } else {
+            showFinalScoreDialog()
+        }
+    }
     /*
 * Creates and shows an AlertDialog with the final score.
 */
