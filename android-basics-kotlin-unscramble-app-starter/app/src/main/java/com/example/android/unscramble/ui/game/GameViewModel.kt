@@ -13,6 +13,10 @@ class GameViewModel:ViewModel() {
     val score: Int
         get() = _score
 
+    private var _currentWordCount = 0
+    val currentWordCount: Int
+        get() = _currentWordCount
+
     private var wordsList: MutableList<String> = mutableListOf()
     private lateinit var currentWord: String
 
@@ -68,4 +72,13 @@ class GameViewModel:ViewModel() {
         return false
     }
 
+    /*
+* Re-initializes the game data to restart the game.
+*/
+    fun reinitializeData() {
+        _score = 0
+        _currentWordCount = 0
+        wordsList.clear()
+        getNextWord()
+    }
 }

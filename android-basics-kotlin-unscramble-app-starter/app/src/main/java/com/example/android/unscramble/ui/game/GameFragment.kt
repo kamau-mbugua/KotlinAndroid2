@@ -56,14 +56,16 @@ class GameFragment : Fragment() {
         binding = GameFragmentBinding.inflate(inflater, container, false)
         Log.d("GameFragment", "GameFragment created/re-created!")
         return binding.root
+        Log.d("GameFragment", "Word: ${viewModel.currentScrambledWord} " +
+                "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // Setup a click listener for the Submit and Skip buttons.
-        binding.submit.setOnClickListener {  }
-        binding.skip.setOnClickListener {  }
+        binding.submit.setOnClickListener { onSkipWord()  }
+        binding.skip.setOnClickListener { onSubmitWord() }
         // Update the UI
         updateNextWordOnScreen()
         binding.score.text = getString(R.string.score, 0)
@@ -127,11 +129,29 @@ class GameFragment : Fragment() {
         activity?.finish()
     }
 
-    private fun onSubmitWord() {
+    /*
+* Skips the current word without changing the score.
+*/
+    private fun onSkipWord() {
         if (viewModel.nextWord()) {
+            setErrorTextField(false)
             updateNextWordOnScreen()
         } else {
             showFinalScoreDialog()
+        }
+    }
+
+    private fun onSubmitWord() {
+        val playerWord = binding.textInputEditText.text.toString()
+        if (viewModel.isUserWordCorrect(playerWord)) {
+            setErrorTextField(false)
+            if (viewModel.nextWord()) {
+                updateNextWordOnScreen()
+            } else {
+                showFinalScoreDialog()
+            }
+        }else {
+            setErrorTextField(true)
         }
     }
     /*
